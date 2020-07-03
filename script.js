@@ -18,16 +18,19 @@ linksCollection.push(new Link("Hacker News", "https://news.ycombinator.com", "Ba
 linksCollection.push(new Link("Reddit", "https://reddit.com", "Thomas"));
 linksCollection.push(new Link("Google", "google.com", "Daniel"));
 
+const showLinks = () => {
+    for (let i = 0; i < linksCollection.length; i++) {
+        alert(`${i + 1}: ${linksCollection[i].describe()}`);
+} 
+}
+
 let initialResponse;
 while (initialResponse !== "0") {
-    initialResponse = prompt(`Choose an option: \n 1 : Show links. \n 2 : Add a link. \n 3 : Remove a link. \n 0 : Quit.`);
-    
+    initialResponse = prompt(`Choose an option: \n 1 : Show links. \n 2 : Add a link. \n 3 : Remove a link. \n 0 : Quit.`); 
     switch (initialResponse){
         case "1" : {
             if (linksCollection.length > 0) {
-            for (let i = 0; i < linksCollection.length; i++) {
-                alert(`${i + 1}: ${linksCollection[i].describe()}`);
-                }
+            showLinks();
             } else {
                 alert("The collection is empty so there are no links to show.");
             }
@@ -39,12 +42,9 @@ while (initialResponse !== "0") {
             let author = prompt(`What is your name? You're the author of this link.`);
             const newLink = new Link (title, url, author);
             linksCollection.push(newLink);
-            for (let i = 0; i < linksCollection.length; i++) {
-                alert(`${i + 1}: ${linksCollection[i].describe()}`);
-                }
+            showLinks();
           break;
         }
-
         case "3" : {
             if (linksCollection.length > 0) {
             let indexDelete = Number(prompt(`What is the index of the link you want to delete?\nThere are only ${linksCollection.length} links in the collection. \nPress 0 to go back.`));
@@ -55,9 +55,7 @@ while (initialResponse !== "0") {
                     indexDelete = Number(prompt(`What is the index of the link you want to delete?\nThere are only ${linksCollection.length} links in the collection. \nPress 0 to go back.`));
                 }else {
                     linksCollection.splice(`${indexDelete - 1}`, 1); 
-                    for (let i = 0; i < linksCollection.length; i++) {
-                        alert(`${i + 1}: ${linksCollection[i].describe()}`);
-                    }
+                    showLinks();
                 }
             } else {
                 alert("No links to remove");
@@ -66,4 +64,4 @@ while (initialResponse !== "0") {
         } 
     }
 }
-alert("See you later!");
+alert("See you later!")
